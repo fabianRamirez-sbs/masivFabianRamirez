@@ -1,88 +1,62 @@
-import Vue from 'vue'
-import axios from "axios"
+import axios from 'axios'
 
 const getClient = () => {
-  const options = {};
-  if (Vue.prototype.$restApiToken && sessionStorage.tokenSBS.length > 0) {
-    // options.headers = {
-    //   Authorization: `Bearer ${store.getters["userStore/getTokenData"]}`
-    // };
-    options.headers = {
-      Authorization: `Bearer ${sessionStorage.tokenSBS}`
-    };
-  }
+  const options = {}
+  const client = axios.create(options)
 
-  const client = axios.create(options);
-
-  client.interceptors.request.use(
-    requestConfig => requestConfig,
-    (requestError) => {
-      //Raven.captureException(requestError);
-      return Promise.reject(requestError);
-    },
-  );
-
-  client.interceptors.response.use(
-    response => response,
-    (error) => {
-      return Promise.reject(error);
-    },
-  );
-
-  return client;
-};
+  return client
+}
 
 export default {
 
-  get(url, conf = {}) {
+  get (url, conf = {}) {
     const client = getClient()
     return client.get(url, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
 
-  delete(url, conf = {}) {
+  delete (url, conf = {}) {
     const client = getClient()
     return client.delete(url, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
 
-  head(url, conf = {}) {
+  head (url, conf = {}) {
     const client = getClient()
     return client.head(url, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
 
-  options(url, conf = {}) {
+  options (url, conf = {}) {
     const client = getClient()
     return client.options(url, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
 
-  post(url, data = {}, conf = {}) {
+  post (url, data = {}, conf = {}) {
     const client = getClient()
     return client.post(url, data, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
 
-  put(url, data = {}, conf = {}) {
+  put (url, data = {}, conf = {}) {
     const client = getClient()
     return client.put(url, data, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
 
-  patch(url, data = {}, conf = {}) {
+  patch (url, data = {}, conf = {}) {
     const client = getClient()
     return client.patch(url, data, conf)
       .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .catch(error => Promise.reject(error))
   },
-
 
   /* Download document */
   /*
@@ -97,17 +71,17 @@ export default {
     });
     */
 
-  forceFileDownload(response, name = 'file.pdf', openFile = false) {
+  forceFileDownload (response, name = 'file.pdf', openFile = false) {
     const fileURL = window.URL.createObjectURL(new Blob([response.data])),
-      fileLink = document.createElement('a');
-    fileLink.href = fileURL;
-    fileLink.setAttribute('download', `${name}`);
-    fileLink.setAttribute('target', '_blank');
-    document.body.appendChild(fileLink);
-    fileLink.click();
+      fileLink = document.createElement('a')
+    fileLink.href = fileURL
+    fileLink.setAttribute('download', `${name}`)
+    fileLink.setAttribute('target', '_blank')
+    document.body.appendChild(fileLink)
+    fileLink.click()
     if (openFile) {
-      window.open(fileLink);
+      window.open(fileLink)
     }
-  },
+  }
   /*  / Download document */
 }

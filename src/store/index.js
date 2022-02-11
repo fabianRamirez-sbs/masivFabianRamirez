@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 /* globalModules */
-import DictionariesStore from './modules/dictionaries/dictionariesStore'
+import ComicsStore from './modules/comons/comicsStore'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    DictionariesStore
+    ComicsStore
   }
 })
