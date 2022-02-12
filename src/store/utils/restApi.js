@@ -56,32 +56,5 @@ export default {
     return client.patch(url, data, conf)
       .then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error))
-  },
-
-  /* Download document */
-  /*
-  -----------  example  ------------
-
-  restApi.get(url, {responseType: 'blob'})
-    .then(response => {
-      restApi.forceFileDownload(response, 'poliza.pdf');
-      resolve(response);
-    }, error => {
-      reject(error);
-    });
-    */
-
-  forceFileDownload (response, name = 'file.pdf', openFile = false) {
-    const fileURL = window.URL.createObjectURL(new Blob([response.data])),
-      fileLink = document.createElement('a')
-    fileLink.href = fileURL
-    fileLink.setAttribute('download', `${name}`)
-    fileLink.setAttribute('target', '_blank')
-    document.body.appendChild(fileLink)
-    fileLink.click()
-    if (openFile) {
-      window.open(fileLink)
-    }
   }
-  /*  / Download document */
 }

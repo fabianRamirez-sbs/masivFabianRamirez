@@ -43,7 +43,6 @@ const mutations = {
     state.ratingsList.push(comicData.data)
   }
 }
-
 export default {
   namespaced: true,
   dynamic: true,
